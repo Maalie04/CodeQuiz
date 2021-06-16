@@ -25,44 +25,84 @@ var questions = [
         correct: '<body style = "background-color: yellow;">'
     }
 ]
-var answerDiv = document.getElementById("answerOptions");
-var queDiv = document.getElementById("question");
+var answerEl = document.getElementById("answerOptions");
+var questionEl = document.getElementById("question");
 var QI = 0;
 var startBtn = document.getElementById("start");
+var exitBtn = document.getElementById("quit");
+var restartBtn = document.getElementById("restart");
+var timerEl = document.getElementById("timer");
+var secondsLeft = 10;
+var timerInterval;
 
 function buildQuestionCard() {
-    var questionEl = document.getElementById("question");
+   
     questionEl.textContent = questions[QI].question;
-    answerDiv.innerHTML = "";
-    queDiv.innerHTML = "";
+    answerEl.innerHTML = "";
     questions[QI].answers.forEach(function (answer) {
         var answerBtn = document.createElement("button");
         answerBtn.textContent = answer;
         answerBtn.setAttribute("value", answer);
         answerBtn.onclick = evaluateAnswer;
-        answerDiv.appendChild(answerBtn);
+        answerEl.appendChild(answerBtn); 
     })
 }
 function evaluateAnswer() {
+    var wrong = document.getElementById("question");
+
     console.log(this.value)
-    if (this.value !== questions[QI].correct) {
-        console.log("wrong")
+    
+    if (this.value !== questions [QI].correct) {
+        console.log("wrong");
+       
     } else {
-        console.log("correct")
+        console.log("correct");
     }
     QI++;
     if (QI === questions.length) {
-        answerDiv.innerHTML = '';
-        console.log("endgame")
+        answerEl.innerHTML = '';
+        console.log("endgame");
+        endGame();
     } else {
         buildQuestionCard();
 
     }
 }
 function startGame() {
-    startBtn.setAttribute("style", "display: none;");
+    var begin = document.getElementById("startScreen");
+    begin.setAttribute("class","hide")
+    // startBtn.setAttribute("style", "display: none;");
+    timerEl.setAttribute("style", "font-size:20px;");
     buildQuestionCard();
+    timer();
+
+}
+function endGame() {
+    questionEl.innerHTML = "";
+    
+}
+
+
+function timer() {
+        timerInterval = setInterval(function() {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft + " seconds left to answer question.";
+    
+        if(secondsLeft > 1) {
+          timerEl.textContent = secondsLeft + " seconds left to answer question."; 
+        } else if (secondsLeft === 1) {
+            timerEl.textContent = secondsLeft + " second left to answer question";
+            secondsLeft--;
+        } else {
+            timerEl.textContent = '';
+            clearInterval(timerInterval); 
+        }
+    
+      }, 1000);
+}
+function timeClick() {
 
 }
 
 startBtn.addEventListener("click", startGame);
+exitBtn.addEventListener("click", endGame);

@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/script.js" />
     <link rel="stylesheet" type="text/css" href="./assets/style.css" />
     <title class="quiz">Code Quiz</title>
 </head>
 
 <body>
-    <div class="startBtn">
+    <div class="startBtn" id="timer">
+        <div class="scores">Scores:</div>
         <button id="start">
             Start Quiz
         </button>
     </div>
     <div class="infoBox">
-        <div class="boxTitle">
+        <div class="boxTitle" id="startScreen">
             <span>Coding Quiz Questions</span>
         </div>
         <div class="infoOption">
@@ -25,15 +25,11 @@
             <div id="answerOptions">
             </div>
         </div>
-        <div class="buttons">
-            <button class="quit">Exit Quiz</button>
-            <button class="restart">Continue</button>
-        </div>
+<!-- <div class="buttons">
+            <button id="quit">Exit Quiz</button>
+            <button id="restart">Continue</button>
+       </div> -->
     </div>
-    </div>
-
-    <div class="quizBox">
-
     </div>
 <script src="assets/script.js"></script>
 </body>

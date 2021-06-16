@@ -29,8 +29,7 @@ var answerEl = document.getElementById("answerOptions");
 var questionEl = document.getElementById("question");
 var QI = 0;
 var startBtn = document.getElementById("start");
-var exitBtn = document.getElementById("quit");
-var restartBtn = document.getElementById("restart");
+var exitBtn = document.getElementById("restart");
 var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
@@ -85,7 +84,7 @@ function evaluateAnswer() {
         console.log("endgame");
         endGame();
     } else {
-        buildQuestionCard();
+       
         console.log("next");
 
     }
@@ -97,38 +96,28 @@ function endGame() {
     // add initials 
     clearInterval(timerInterval);
 }
-function update() {
-    // update time 
-}
 
 function timer() {
-        timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
+    secondsLeft--;
+    timerEl.textContent = secondsLeft + " seconds left to answer question.";
+
+    if(secondsLeft > 1) {
+      timerEl.textContent = secondsLeft + " seconds left to answer question."; 
+    } else if (secondsLeft === 1) {
+        timerEl.textContent = secondsLeft + " second left to answer question.";
         secondsLeft--;
-        timerEl.textContent = secondsLeft + " seconds left to answer question.";
-    
-        if(secondsLeft > 1) {
-          timerEl.textContent = secondsLeft + " seconds left to answer question."; 
-        } else if (secondsLeft === 1) {
-            timerEl.textContent = secondsLeft + " second left to answer question.";
-            secondsLeft--;
-        } else if (secondsLeft === 0){
-            clearInterval(timerInterval); 
-        }
-        else {
-            timerEl.textContent = "";
-            clearInterval(timerInterval);
-            timerEl.textContent = "This Quiz is Over!"
-        }
-    
-      }, 980);
-}
-
-
-function nxtQuestion() {
- if (this.value !== question [QI].correct){
-    time--;
+    } else if (secondsLeft === 0){
+        clearInterval(timerInterval); 
     }
-   
+    else {
+        timerEl.textContent = "";
+        clearInterval(timerInterval);
+        timerEl.textContent = "This Quiz is Over!"
+    }
+      
+  }, 980);
+
 };
 
 startBtn.addEventListener("click", startGame);

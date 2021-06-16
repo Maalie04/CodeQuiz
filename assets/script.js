@@ -29,6 +29,7 @@ var answerDiv = document.getElementById("answerOptions");
 var queDiv = document.getElementById("question");
 var QI = 0;
 var startBtn = document.getElementById("start");
+
 function buildQuestionCard() {
     var questionEl = document.getElementById("question");
     questionEl.textContent = questions[QI].question;

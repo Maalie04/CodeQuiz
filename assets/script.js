@@ -33,8 +33,9 @@ var exitBtn = document.getElementById("quit");
 var restartBtn = document.getElementById("restart");
 var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
+var titleEl = document.getElementById("title");
 // var feedbackHideEl = document.querySelector("feedbackHide");
-var secondsLeft = 10;
+var secondsLeft = 30;
 var timerInterval;
 var doneEl = document.getElementById("done");
 
@@ -67,10 +68,6 @@ function evaluateAnswer() {
     
     if (this.value !== questions[QI].correct) {
         console.log("wrong");
-       timerEl -= 2; 
-        if (timerEl < 0){
-            timerEl === 0;
-        }
         secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "wrong!";
     } else {
@@ -90,13 +87,15 @@ function evaluateAnswer() {
     } else {
         buildQuestionCard();
         console.log("next");
+
     }
 }
 function endGame() {
     questionEl.innerHTML = "";
-    clearInterval(timerInterval);
+    titleEl.innerHTML = "";
     // final score
     // add initials 
+    clearInterval(timerInterval);
 }
 function update() {
     // update time 
@@ -120,7 +119,7 @@ function timer() {
             clearInterval(timerInterval); 
         }
     
-      }, 1000);
+      }, 980);
 }
 
 

@@ -36,6 +36,7 @@ var feedbackEl = document.getElementById("feedback");
 // var feedbackHideEl = document.querySelector("feedbackHide");
 var secondsLeft = 10;
 var timerInterval;
+var doneEl = document.getElementById("done");
 
 function startGame() {
     var begin = document.getElementById("startScreen");

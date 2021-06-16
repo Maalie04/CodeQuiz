@@ -32,8 +32,20 @@ var startBtn = document.getElementById("start");
 var exitBtn = document.getElementById("quit");
 var restartBtn = document.getElementById("restart");
 var timerEl = document.getElementById("timer");
+var feedbackEl = document.getElementById("feedback");
+// var feedbackHideEl = document.querySelector("feedbackHide");
 var secondsLeft = 10;
 var timerInterval;
+
+function startGame() {
+    var begin = document.getElementById("startScreen");
+    begin.setAttribute("class","hide");
+    // startBtn.setAttribute("style", "display: none;");
+    timerEl.setAttribute("style", "font-size:20px;");
+    buildQuestionCard();
+    timer();
+
+}
 
 function buildQuestionCard() {
    
@@ -48,40 +60,46 @@ function buildQuestionCard() {
     })
 }
 function evaluateAnswer() {
-    var wrong = document.getElementById("question");
+   
 
-    console.log(this.value)
+    console.log(this.value);
     
-    if (this.value !== questions [QI].correct) {
+    if (this.value !== questions[QI].correct) {
         console.log("wrong");
-       
+       timerEl -= 2; 
+        if (timerEl < 0){
+            timerEl === 0;
+        }
+        secondsLeft.textContent = timerEl;
+        feedbackEl.textContent = "wrong!";
     } else {
         console.log("correct");
+        feedbackEl.textContent = "correct!";
     }
+    //feedbackEl.setAttribute("class","feedback");
+    //setTimeout(function() {
+    //    feedbackEl.setAttribute("class", "feedback hide" );
+    //}, 1000 );
     QI++;
+
     if (QI === questions.length) {
-        answerEl.innerHTML = '';
+        answerEl.innerHTML = "";
         console.log("endgame");
         endGame();
     } else {
         buildQuestionCard();
-
+        console.log("next");
     }
-}
-function startGame() {
-    var begin = document.getElementById("startScreen");
-    begin.setAttribute("class","hide")
-    // startBtn.setAttribute("style", "display: none;");
-    timerEl.setAttribute("style", "font-size:20px;");
-    buildQuestionCard();
-    timer();
-
 }
 function endGame() {
     questionEl.innerHTML = "";
-    
+    clearInterval(timerInterval);
+    // final score
+    // add initials 
 }
-
+function update() {
+    // update time 
+}
 
 function timer() {
         timerInterval = setInterval(function() {
@@ -91,18 +109,26 @@ function timer() {
         if(secondsLeft > 1) {
           timerEl.textContent = secondsLeft + " seconds left to answer question."; 
         } else if (secondsLeft === 1) {
-            timerEl.textContent = secondsLeft + " second left to answer question";
+            timerEl.textContent = secondsLeft + " second left to answer question.";
             secondsLeft--;
-        } else {
-            timerEl.textContent = '';
+        } else if (secondsLeft === 0){
+            clearInterval(timerInterval); 
+        }
+        else {
+            timerEl.textContent = "";
             clearInterval(timerInterval); 
         }
     
       }, 1000);
 }
-function timeClick() {
 
-}
+
+function nxtQuestion() {
+ if (this.value !== question [QI].correct){
+    time--;
+    }
+   
+};
 
 startBtn.addEventListener("click", startGame);
 exitBtn.addEventListener("click", endGame);

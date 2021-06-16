@@ -116,7 +116,8 @@ function timer() {
         }
         else {
             timerEl.textContent = "";
-            clearInterval(timerInterval); 
+            clearInterval(timerInterval);
+            timerEl.textContent = "This Quiz is Over!"
         }
     
       }, 980);

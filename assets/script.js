@@ -34,10 +34,10 @@ var restartBtn = document.getElementById("restart");
 var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
+var listEl = document.getElementById("listOption");
 // var feedbackHideEl = document.querySelector("feedbackHide");
 var secondsLeft = 30;
 var timerInterval;
-var doneEl = document.getElementById("done");
 
 function startGame() {
     var begin = document.getElementById("startScreen");
@@ -107,6 +107,7 @@ function evaluateAnswer() {
     } else {
         userChoice();
         console.log("next");
+      
 
     }
 }
@@ -129,5 +130,6 @@ function restart() {
 
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", restart);
+
 
 

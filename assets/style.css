@@ -64,7 +64,7 @@ body {
     cursor: pointer;
 }
 
-.infoBox .buttons #restart {
+.infoBox .buttons #submit {
     margin-top: 70px;
 }
 
@@ -72,6 +72,4 @@ body {
     margin: 20px;
     transform: translate(-250%, 9%);   
 }
-.answerOptions {
-    
-}
+

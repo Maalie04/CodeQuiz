@@ -29,13 +29,12 @@ var answerEl = document.getElementById("answerOptions");
 var questionEl = document.getElementById("question");
 var QI = 0;
 var startBtn = document.getElementById("start");
-var exitBtn = document.getElementById("quit");
-var restartBtn = document.getElementById("restart");
+var submitBtn = document.getElementById("submit");
 var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
 var listEl = document.getElementById("listOption");
-// var feedbackHideEl = document.querySelector("feedbackHide");
+var scoreEl = document.getElementById.("score");
 var secondsLeft = 30;
 var timerInterval;
 
@@ -43,25 +42,21 @@ function startGame() {
     var begin = document.getElementById("startScreen");
     begin.setAttribute("class","hide");
     timerEl.setAttribute("style", "font-size:20px;");
+    answerEl.onclick = evaluateAnswer;
     userChoice();
     timer();
-
 }
-
 // this function cyphers through my object array questions
 function userChoice() {
-   
     questionEl.textContent = questions[QI].question;
     answerEl.innerHTML = "";
     questions[QI].answers.forEach(function (answer) {
         var answerBtn = document.createElement("button");
         answerBtn.textContent = answer;
         answerBtn.setAttribute("value", answer);
-        answerBtn.onclick = evaluateAnswer;
         answerEl.appendChild(answerBtn); 
     })
 }
-
 
 function timer() {
     timerInterval = setInterval(function() {
@@ -83,53 +78,62 @@ function timer() {
 
 
 };
+  
+function evaluateAnswer(event){
+var target = event.target;
+ 
+if (!target.matches("button")) {
+    return;
+}
 
-function evaluateAnswer() {
-   
-
-    console.log(this.value);
-    
-    if (this.value !== questions[QI].correct) {
+console.log(target.value);
+     
+    if (target.value !== questions[QI].correct) {
         console.log("Wrong");
         secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "Wrong!";
     } else {
         console.log("Correct");
+        secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "Correct!";
     };
-   
-    QI++;
+   QI++
 // conditional statements that cyphers through the questions until the end
-    if (QI === questions.length) {
+    if (this.target === questions.length) {
         answerEl.innerHTML = "";
         console.log("endgame");
         endGame();
     } else {
         userChoice();
         console.log("next");
-      
-
     }
 }
 
-
 function endGame() {
-    questionEl.innerHTML = "";
-    titleEl.innerHTML = "";
-    answerEl.innerHTML = "";
     timerEl.innerHTML = "";
+    questionEl.innerHTML = "";
+    answerEl.innerHTML = "";
     clearInterval(timerInterval);
-    
+QI = 0;
+
+function storeResult(event) {
+
+}
+
+
+
 };
 
-function restart() {
+function submit() {
    endGame();
-   
 };
+
+
 
 
 startBtn.addEventListener("click", startGame);
-restartBtn.addEventListener("click", restart);
+submitBtn.addEventListener("click", submit);
+
 
 
 

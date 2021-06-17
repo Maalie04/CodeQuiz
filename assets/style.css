@@ -54,7 +54,6 @@ body {
     justify-content: center;
     padding: 0 35px;
     border-radius: 15px;
-   
 }
 
 .infoBox .buttons button{
@@ -69,3 +68,7 @@ body {
     margin-top: 70px;
 }
 
+.scores {
+    margin: 20px;
+    margin-left: -300px;
+}

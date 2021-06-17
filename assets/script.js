@@ -29,7 +29,8 @@ var answerEl = document.getElementById("answerOptions");
 var questionEl = document.getElementById("question");
 var QI = 0;
 var startBtn = document.getElementById("start");
-var exitBtn = document.getElementById("restart");
+var exitBtn = document.getElementById("quit");
+var restartBtn = document.getElementById("restart");
 var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
@@ -41,13 +42,13 @@ var doneEl = document.getElementById("done");
 function startGame() {
     var begin = document.getElementById("startScreen");
     begin.setAttribute("class","hide");
-    // startBtn.setAttribute("style", "display: none;");
     timerEl.setAttribute("style", "font-size:20px;");
     buildQuestionCard();
     timer();
 
 }
 
+// this function cyphers through my object array questions
 function buildQuestionCard() {
    
     questionEl.textContent = questions[QI].question;
@@ -73,10 +74,7 @@ function evaluateAnswer() {
         console.log("correct");
         feedbackEl.textContent = "correct!";
     }
-    //feedbackEl.setAttribute("class","feedback");
-    //setTimeout(function() {
-    //    feedbackEl.setAttribute("class", "feedback hide" );
-    //}, 1000 );
+   
     QI++;
 
     if (QI === questions.length) {
@@ -84,18 +82,15 @@ function evaluateAnswer() {
         console.log("endgame");
         endGame();
     } else {
-       
         console.log("next");
 
     }
-}
+};
 function endGame() {
     questionEl.innerHTML = "";
     titleEl.innerHTML = "";
-    // final score
-    // add initials 
-    clearInterval(timerInterval);
-}
+};
+
 
 function timer() {
     timerInterval = setInterval(function() {
@@ -107,18 +102,73 @@ function timer() {
     } else if (secondsLeft === 1) {
         timerEl.textContent = secondsLeft + " second left to answer question.";
         secondsLeft--;
-    } else if (secondsLeft === 0){
-        clearInterval(timerInterval); 
-    }
-    else {
+    } 
+         else {
         timerEl.textContent = "";
-        clearInterval(timerInterval);
         timerEl.textContent = "This Quiz is Over!"
     }
-      
+
   }, 980);
+
 
 };
 
+function evaluateAnswer() {
+   
+
+    console.log(this.value);
+    
+    if (this.value !== questions[QI].correct) {
+        console.log("Wrong");
+        secondsLeft.textContent = timerEl;
+        feedbackEl.textContent = "Wrong!";
+    } else {
+        console.log("Correct");
+        feedbackEl.textContent = "Correct!";
+    };
+   
+    QI++;
+// conditional statements that cyphers through the questions until the end
+    if (QI === questions.length) {
+        answerEl.innerHTML = "";
+        console.log("endgame");
+        endGame();
+    } else {
+        buildQuestionCard();
+        console.log("next");
+
+    }
+}
+function endGame() {
+    questionEl.innerHTML = "";
+    titleEl.innerHTML = "";
+};
+
+function timer() {
+    timerInterval = setInterval(function() {
+    secondsLeft--;
+    timerEl.textContent = secondsLeft + " seconds left to answer question.";
+
+    if(secondsLeft > 1) {
+      timerEl.textContent = secondsLeft + " seconds left to answer question."; 
+    } else if (secondsLeft === 1) {
+        timerEl.textContent = secondsLeft + " second left to answer question.";
+        secondsLeft--;
+    } 
+         else {
+        timerEl.textContent = "";
+        timerEl.textContent = "This Quiz is Over!"
+        clearInterval(timerInterval);
+    }
+
+  }, 980);
+
+
+};
+function restart() {
+    timer();
+};
+
 startBtn.addEventListener("click", startGame);
-exitBtn.addEventListener("click", endGame);
+restartBtn.addEventListener("click", endGame);
+

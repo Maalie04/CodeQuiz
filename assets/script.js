@@ -43,6 +43,7 @@ function startGame() {
     var begin = document.getElementById("startScreen");
     begin.setAttribute("class","hide");
     timerEl.setAttribute("style", "font-size:20px;");
+    answerEl.onclick = evaluateAnswer; // moving this from answerBtn
     userChoice();
     timer();
 
@@ -57,7 +58,10 @@ function userChoice() {
         var answerBtn = document.createElement("button");
         answerBtn.textContent = answer;
         answerBtn.setAttribute("value", answer);
-        answerBtn.onclick = evaluateAnswer;
+        // Moved this up to startGame and added the click handler to the button container
+        //   every time you add a possible answer, you're attaching an event listener (5 questions * 4 answers = 20)
+        //   moving this up to its parent means I only ever need to listen once and then see who was clicked "underneath"
+        //   see the changes I made to evaluateAnswer
         answerEl.appendChild(answerBtn); 
     })
 }
@@ -84,12 +88,16 @@ function timer() {
 
 };
 
-function evaluateAnswer() {
-   
+function evaluateAnswer(event) {
+    var target = event.target;
 
-    console.log(this.value);
+    if (!target.matches("button")) {
+        return
+    }
+
+    console.log(target.value);
     
-    if (this.value !== questions[QI].correct) {
+    if (target.value !== questions[QI].correct) {
         console.log("Wrong");
         secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "Wrong!";
@@ -120,6 +128,8 @@ function endGame() {
     timerEl.innerHTML = "";
     clearInterval(timerInterval);
     
+    // Just need to reset your QI here,
+    // then show the inputs for high scores
 };
 
 function restart() {

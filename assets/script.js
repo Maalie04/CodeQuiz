@@ -43,13 +43,13 @@ function startGame() {
     var begin = document.getElementById("startScreen");
     begin.setAttribute("class","hide");
     timerEl.setAttribute("style", "font-size:20px;");
-    buildQuestionCard();
+    userChoice();
     timer();
 
 }
 
 // this function cyphers through my object array questions
-function buildQuestionCard() {
+function userChoice() {
    
     questionEl.textContent = questions[QI].question;
     answerEl.innerHTML = "";
@@ -61,31 +61,7 @@ function buildQuestionCard() {
         answerEl.appendChild(answerBtn); 
     })
 }
-function evaluateAnswer() {
-   
 
-    console.log(this.value);
-    
-    if (this.value !== questions[QI].correct) {
-        console.log("wrong");
-        secondsLeft.textContent = timerEl;
-        feedbackEl.textContent = "wrong!";
-    } else {
-        console.log("correct");
-        feedbackEl.textContent = "correct!";
-    }
-   
-    QI++;
-
-    if (QI === questions.length) {
-        answerEl.innerHTML = "";
-        console.log("endgame");
-        endGame();
-    } else {
-        console.log("next");
-
-    }
-};
 
 function timer() {
     timerInterval = setInterval(function() {
@@ -101,13 +77,39 @@ function timer() {
          else {
         timerEl.textContent = "";
         timerEl.textContent = "This Quiz is Over!"
-        clearInterval(timerInterval);
     }
 
   }, 980);
 
 
 };
+
+function evaluateAnswer() {
+   
+
+    console.log(this.value);
+    
+    if (this.value !== questions[QI].correct) {
+        console.log("Wrong");
+        secondsLeft.textContent = timerEl;
+        feedbackEl.textContent = "Wrong!";
+    } else {
+        console.log("Correct");
+        feedbackEl.textContent = "Correct!";
+    };
+   
+    QI++;
+// conditional statements that cyphers through the questions until the end
+    if (QI === questions.length) {
+        answerEl.innerHTML = "";
+        console.log("endgame");
+        endGame();
+    } else {
+        userChoice();
+        console.log("next");
+
+    }
+}
 
 
 function endGame() {
@@ -116,14 +118,16 @@ function endGame() {
     answerEl.innerHTML = "";
     timerEl.innerHTML = "";
     clearInterval(timerInterval);
+    
 };
-
 
 function restart() {
-   QI = 0;
+   endGame();
+   
 };
 
+
 startBtn.addEventListener("click", startGame);
-restartBtn.addEventListener("click", );
+restartBtn.addEventListener("click", restart);
 
 

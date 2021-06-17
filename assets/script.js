@@ -86,63 +86,6 @@ function evaluateAnswer() {
 
     }
 };
-function endGame() {
-    questionEl.innerHTML = "";
-    titleEl.innerHTML = "";
-};
-
-
-function timer() {
-    timerInterval = setInterval(function() {
-    secondsLeft--;
-    timerEl.textContent = secondsLeft + " seconds left to answer question.";
-
-    if(secondsLeft > 1) {
-      timerEl.textContent = secondsLeft + " seconds left to answer question."; 
-    } else if (secondsLeft === 1) {
-        timerEl.textContent = secondsLeft + " second left to answer question.";
-        secondsLeft--;
-    } 
-         else {
-        timerEl.textContent = "";
-        timerEl.textContent = "This Quiz is Over!"
-    }
-
-  }, 980);
-
-
-};
-
-function evaluateAnswer() {
-   
-
-    console.log(this.value);
-    
-    if (this.value !== questions[QI].correct) {
-        console.log("Wrong");
-        secondsLeft.textContent = timerEl;
-        feedbackEl.textContent = "Wrong!";
-    } else {
-        console.log("Correct");
-        feedbackEl.textContent = "Correct!";
-    };
-   
-    QI++;
-// conditional statements that cyphers through the questions until the end
-    if (QI === questions.length) {
-        answerEl.innerHTML = "";
-        console.log("endgame");
-        endGame();
-    } else {
-        buildQuestionCard();
-        console.log("next");
-
-    }
-}
-function endGame() {
-    questionEl.innerHTML = "";
-    titleEl.innerHTML = "";
-};
 
 function timer() {
     timerInterval = setInterval(function() {
@@ -165,10 +108,22 @@ function timer() {
 
 
 };
+
+
+function endGame() {
+    questionEl.innerHTML = "";
+    titleEl.innerHTML = "";
+    answerEl.innerHTML = "";
+    timerEl.innerHTML = "";
+    clearInterval(timerInterval);
+};
+
+
 function restart() {
-    timer();
+   QI = 0;
 };
 
 startBtn.addEventListener("click", startGame);
-restartBtn.addEventListener("click", endGame);
+restartBtn.addEventListener("click", );
+
 

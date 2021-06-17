@@ -70,5 +70,5 @@ body {
 
 .scores {
     margin: 20px;
-    margin-left: -300px;
+    transform: translate(-250%, 9%);   
 }

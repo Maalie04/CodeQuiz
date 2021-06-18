@@ -73,3 +73,8 @@ body {
     transform: translate(-250%, 9%);   
 }
 
+#feedback {
+    font-size: 40px;
+    text-align: center;
+}
+

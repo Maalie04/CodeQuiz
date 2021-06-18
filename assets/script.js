@@ -34,7 +34,7 @@ var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
 var listEl = document.getElementById("listOption");
-// var feedbackHideEl = document.querySelector("feedbackHide");
+var infoEl = document.getElementsByClassName("infoBox");
 var secondsLeft = 30;
 var timerInterval;
 
@@ -85,6 +85,9 @@ function timer() {
  
 function evaluateAnswer(event){
 var target = event.target;
+var wrong = "Wrong!";
+var correct = "Correct!";
+feedbackEl.setAttribute("class","flash");
  
 if (!target.matches("button")) {
     return
@@ -95,12 +98,12 @@ console.log(target.value);
     if (target.value !== questions[QI].correct) {
         console.log("Wrong");
         secondsLeft.textContent = timerEl;
-        feedbackEl.textContent = "Wrong!";
+        feedbackEl.textContent = wrong;
         secondsLeft = secondsLeft - 5;
     } else {
         console.log("Correct");
         secondsLeft.textContent = timerEl;
-        feedbackEl.textContent = "Correct!";
+        feedbackEl.textContent = correct;
     };
    
     QI++;
@@ -131,7 +134,7 @@ function endGame() {
 
 
 startBtn.addEventListener("click", startGame);
-submitBtn.addEventListener("click", submit);
+
 
 
 

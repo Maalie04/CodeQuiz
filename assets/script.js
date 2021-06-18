@@ -122,13 +122,18 @@ console.log(target.value);
     }
 }
 
+function addInitials(event) {
+    event.preventdefault();
+
+}
+
 
 function endGame() {
     questionEl.innerHTML = "";
     titleEl.innerHTML = "";
     answerEl.innerHTML = "";
     timerEl.innerHTML = "";
-    clearInterval(timerInterval);    
+    clearInterval(timerInterval);   
 };
 
 

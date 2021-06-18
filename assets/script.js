@@ -82,9 +82,7 @@ function timer() {
 
 
 };
-
-
-   
+ 
 function evaluateAnswer(event){
 var target = event.target;
  
@@ -130,10 +128,6 @@ function endGame() {
     clearInterval(timerInterval);    
 };
 
-function submit() {
-   endGame();
-  
-};
 
 
 startBtn.addEventListener("click", startGame);

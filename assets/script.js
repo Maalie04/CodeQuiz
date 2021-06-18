@@ -34,7 +34,7 @@ var timerEl = document.getElementById("timer");
 var feedbackEl = document.getElementById("feedback");
 var titleEl = document.getElementById("title");
 var listEl = document.getElementById("listOption");
-var scoreEl = document.getElementById.("score");
+// var feedbackHideEl = document.querySelector("feedbackHide");
 var secondsLeft = 30;
 var timerInterval;
 
@@ -45,9 +45,12 @@ function startGame() {
     answerEl.onclick = evaluateAnswer;
     userChoice();
     timer();
+
 }
+
 // this function cyphers through my object array questions
 function userChoice() {
+   
     questionEl.textContent = questions[QI].question;
     answerEl.innerHTML = "";
     questions[QI].answers.forEach(function (answer) {
@@ -57,6 +60,7 @@ function userChoice() {
         answerEl.appendChild(answerBtn); 
     })
 }
+
 
 function timer() {
     timerInterval = setInterval(function() {
@@ -78,12 +82,14 @@ function timer() {
 
 
 };
-  
+
+
+   
 function evaluateAnswer(event){
 var target = event.target;
  
 if (!target.matches("button")) {
-    return;
+    return
 }
 
 console.log(target.value);
@@ -92,43 +98,42 @@ console.log(target.value);
         console.log("Wrong");
         secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "Wrong!";
+        secondsLeft = secondsLeft - 5;
     } else {
         console.log("Correct");
         secondsLeft.textContent = timerEl;
         feedbackEl.textContent = "Correct!";
     };
-   QI++
+   
+    QI++;
 // conditional statements that cyphers through the questions until the end
-    if (this.target === questions.length) {
+    if (QI === questions.length && secondsLeft > 0) {
+       setInterval(secondsLeft);
         answerEl.innerHTML = "";
         console.log("endgame");
+        console.log(secondsLeft);
         endGame();
+        timerEl.textContent = "Your Score is: " + secondsLeft + "/30";
     } else {
         userChoice();
-        console.log("next");
+        console.log("next");     
+
     }
 }
 
+
 function endGame() {
-    timerEl.innerHTML = "";
     questionEl.innerHTML = "";
+    titleEl.innerHTML = "";
     answerEl.innerHTML = "";
-    clearInterval(timerInterval);
-QI = 0;
-
-function storeResult(event) {
-
-}
-
-
-
+    timerEl.innerHTML = "";
+    clearInterval(timerInterval);    
 };
 
 function submit() {
    endGame();
+  
 };
-
-
 
 
 startBtn.addEventListener("click", startGame);
